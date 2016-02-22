@@ -16,6 +16,9 @@ class MoviesController < ApplicationController
     @ratingsarray=[]
     if (params.has_key?(:ratings)) #workin
       @ratingsarray = (params[:ratings].keys)
+     # @ratingsarray.each do |i|
+      #  i = i.sub!(/ratings/, '')
+    #  end
       cookies[:ratings] = @ratingsarray
     elsif (cookies.has_key?(:ratings)) #not
       @ratingsarray = cookies[:ratings].split(/&/) #I have no idea why cookies saves an array as a string, but I hate everythign and it is 2:40 in the morning
