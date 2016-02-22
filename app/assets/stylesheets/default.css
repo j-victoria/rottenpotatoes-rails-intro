@@ -59,3 +59,23 @@ form label {
   font-weight: bold;
   color: maroon;
 }
+a#title_header {
+  color:red;
+}
+
+a#release_date_header {
+  color:yellow;
+}
+
+form_tag#ratings_form {
+  background-color:yellow;
+}
+
+#ratings_submit {
+  
+}
+
+#rating_G {}
+#rating_PG {}
+#rating_PG-13 {}
+#rating_R {}

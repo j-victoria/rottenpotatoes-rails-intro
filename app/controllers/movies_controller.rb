@@ -12,18 +12,32 @@ class MoviesController < ApplicationController
 
   def index
     
+    @all_ratings=['G','PG','PG-13','R']
+    @ratingsarray=[]
+    if (params.has_key?(:ratings)) #workin
+      @ratingsarray = (params[:ratings].keys)
+      cookies[:ratings] = @ratingsarray
+    elsif (cookies.has_key?(:ratings)) #not
+      @ratingsarray = cookies[:ratings].split(/&/) #I have no idea why cookies saves an array as a string, but I hate everythign and it is 2:40 in the morning
+    else #does work, cookies are not
+      @ratingsarray = ['G', 'PG', 'PG-13', 'R']
+      cookies[:ratings] = @ratingsarray
+    end
+    
+    
+    
     if (params[:sorted] == 'title_sorted') 
-      @movies = (Movie.all).order(:title)
+      @movies = (Movie.where(rating: @ratingsarray)).order(:title)
       cookies[:sorted] = 'title_sorted'
     elsif (params[:sorted] == 'release_date_sorted') 
-      @movies = (Movie.all).order(:release_date)
+      @movies = (Movie.where(rating: @ratingsarray)).order(:release_date)
       cookies[:sorted] = 'release_date_sorted'
     elsif (cookies[:sorted] == 'title_sorted')
-      @movies = (Movie.all).order(:title)
+      @movies = (Movie.where(rating: @ratingsarray)).order(:title)
     elsif (cookies[:sorted] == 'release_date_sorted')
-      @movies = (Movie.all).order(:release_date)
+      @movies = (Movie.where(rating: @ratingsarray)).order(:release_date)
     else
-      @movies = Movie.all
+      @movies = Movie.where(rating: @ratingsarray)
     end
   end
 
