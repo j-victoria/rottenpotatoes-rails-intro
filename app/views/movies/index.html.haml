@@ -4,9 +4,11 @@
 %table#movies
   %thead
     %tr
-      %th Movie Title
+      %th
+        %a{:id => 'title_header' :href => '/?sorted=title_sorted'} Movie Title
       %th Rating
-      %th Release Date
+      %th 
+        %a{:id => 'release_date_header' :href => '/?sorted=release_date_sorted'} Release Date
       %th More Info
   %tbody
     - @movies.each do |movie|
